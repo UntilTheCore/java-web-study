@@ -15,4 +15,6 @@ public interface UserDao {
   public List<User> findAll();
 
   public int addUser(User user);
+
+  public int deleteUser(String id);
 }

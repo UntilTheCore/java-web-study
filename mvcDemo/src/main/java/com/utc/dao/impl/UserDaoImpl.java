@@ -43,4 +43,10 @@ public class UserDaoImpl implements UserDao {
       user.getEmail()
     );
   }
+
+  @Override
+  public int deleteUser(String id) {
+    String sql = "DELETE FROM users WHERE id = ?;";
+    return jdbcTemplate.update(sql, id);
+  }
 }

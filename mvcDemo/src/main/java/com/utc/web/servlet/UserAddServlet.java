@@ -10,7 +10,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
 import java.util.Map;
 
 @WebServlet("/userAddServlet")
@@ -30,10 +29,11 @@ public class UserAddServlet extends HttpServlet {
     UserService us = new UserServiceImpl();
     if (us.addUser(user) > 0) {
       // 添加成功
-      System.out.println("add seccess!");
+      response.sendRedirect(getServletContext().getContextPath() + "/userListServlet");
     } else {
       // 添加失败
-      System.out.println("add faild!");
+      request.getSession().setAttribute("addError", "添加失败!");
+      response.sendRedirect(this.getServletContext().getContextPath() + "/userListServlet");
     }
   }
 

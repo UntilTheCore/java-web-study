@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
     // 操作 dao 完成添加用户
     return dao.addUser(user);
   }
+
+  @Override
+  public int deleteUser(String id) {
+    return dao.deleteUser(id);
+  }
 }

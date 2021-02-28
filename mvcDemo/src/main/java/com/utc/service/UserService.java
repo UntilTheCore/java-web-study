@@ -20,4 +20,6 @@ public interface UserService {
    * @return
    */
   public int addUser(User user);
+
+  public int deleteUser(String id);
 }
