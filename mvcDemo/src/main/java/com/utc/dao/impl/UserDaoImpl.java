@@ -49,4 +49,21 @@ public class UserDaoImpl implements UserDao {
     String sql = "DELETE FROM users WHERE id = ?;";
     return jdbcTemplate.update(sql, id);
   }
+
+  @Override
+  public User findUser(String id) {
+    try {
+      String sql = "SELECT * FROM users WHERE id = ?;";
+      return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), id);
+    } catch (DataAccessException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public int updateUser(User user) {
+    String sql = "UPDATE users set gender=?,age=?,address=?,email=? WHERE id=?;";
+    return jdbcTemplate.update(sql, user.getGender(), user.getAge(), user.getAddress(), user.getEmail(), user.getId());
+  }
 }

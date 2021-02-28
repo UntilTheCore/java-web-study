@@ -85,7 +85,7 @@
                 <td>${user.qq}</td>
                 <td>${user.email}</td>
                 <td><a class="btn btn-default btn-sm"
-                       href="">修改</a>&nbsp;<a
+                       href="${pageContext.request.contextPath}/userFindServlet?id=${user.id}">修改</a>&nbsp;<a
                         class="btn btn-default btn-sm"
                         href="${pageContext.request.contextPath}/userDeleteServlet?id=${user.id}">删除</a></td>
             </tr>
