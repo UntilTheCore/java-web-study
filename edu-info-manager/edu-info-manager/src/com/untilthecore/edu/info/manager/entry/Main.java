@@ -1,6 +1,7 @@
 package com.untilthecore.edu.info.manager.entry;
 
 import com.untilthecore.edu.info.manager.controller.StudentController;
+import com.untilthecore.edu.info.manager.controller.TeacherController;
 
 import java.util.Scanner;
 
@@ -14,13 +15,13 @@ public class Main {
             switch (choice) {
                 case "1":
                     // 学生管理系统
-                    System.out.println("学生管理系统");
                     StudentController studentController = new StudentController();
                     studentController.start();
                     break;
                 case "2":
                     // 教师管理系统
-                    System.out.println("教师管理系统");
+                    TeacherController teacherController = new TeacherController();
+                    teacherController.start();
                     break;
                 case "3":
                     // 退出

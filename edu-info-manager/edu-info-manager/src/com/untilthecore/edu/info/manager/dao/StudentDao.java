@@ -4,11 +4,11 @@ import com.untilthecore.edu.info.manager.domain.Student;
 
 import java.util.ArrayList;
 
-public class StudentDao {
+public class StudentDao extends BaseDao<Student> {
   private static final ArrayList<Student> students = new ArrayList<>();
 
-  public boolean add(Student s) {
-    return students.add(s);
+  public boolean add(Student person) {
+    return students.add(person);
   }
 
   public boolean remove(String id) {
