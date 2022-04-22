@@ -5,10 +5,10 @@ import com.untilthecore.edu.info.manager.domain.Person;
 
 import java.util.ArrayList;
 
-public abstract class BaseService<T> {
-    public BaseDao dao;
+public abstract class BaseService<T, E> {
+    public E dao;
 
-    public BaseService(BaseDao dao) {
+    public BaseService(E dao) {
         this.dao = dao;
     }
 
@@ -22,15 +22,5 @@ public abstract class BaseService<T> {
 
     public abstract ArrayList<T> findAll();
 
-    public boolean isExists(String id) {
-        ArrayList<Person> all = dao.findAll();
-        boolean exists = false;
-        for (Person person : all) {
-            if (person.getId().equals(id)) {
-                exists = true;
-                break;
-            }
-        }
-        return exists;
-    }
+    public abstract boolean isExists(String id);
 }

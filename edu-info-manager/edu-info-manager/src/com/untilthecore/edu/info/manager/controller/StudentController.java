@@ -1,12 +1,13 @@
 package com.untilthecore.edu.info.manager.controller;
 
+import com.untilthecore.edu.info.manager.dao.StudentDao;
 import com.untilthecore.edu.info.manager.domain.Person;
 import com.untilthecore.edu.info.manager.domain.Student;
 import com.untilthecore.edu.info.manager.service.StudentService;
 
 import java.util.ArrayList;
 
-public class StudentController extends BaseController<Student> {
+public class StudentController extends BaseController<Student, StudentDao> {
 
     public StudentController() {
         super(new StudentService());
@@ -17,22 +18,21 @@ public class StudentController extends BaseController<Student> {
         super.start("学生");
     }
 
-    protected Person add() {
-        Person p = super.add();
+    protected void add() {
+        Person p = super.createPerson();
         // 若有其他字段，则在此处继续扩展
-        if(p != null) {
-            if(this.service.add(new Student(p.getId(), p.getName(), p.getAge(), p.getGender()))) {
+        if (p != null) {
+            if (this.service.add(new Student(p.getId(), p.getName(), p.getAge(), p.getGender()))) {
                 System.out.println("添加学生成功!");
             } else {
                 System.out.println("添加学生失败!");
             }
         }
-        return p;
     }
 
     @Override
     protected void find() {
-        Student student = (Student)super.find(this.service);
+        Student student = super.findUser();
 
         if (student != null) {
             System.out.println("查到学生信息：" + student.toString());
@@ -43,24 +43,14 @@ public class StudentController extends BaseController<Student> {
 
     @Override
     protected void findAll() {
-        ArrayList<Person> personArr = super.findAll(this.service);
-        if (personArr.size() > 0) {
-            System.out.println("查询到学生信息列表，容量:" + personArr.size());
-            for (Person person : personArr) {
-                System.out.println(person.toString());
+        ArrayList<Student> studentArrayList = super.findAllUser();
+        if (studentArrayList.size() > 0) {
+            System.out.println("查询到学生信息列表，容量:" + studentArrayList.size());
+            for (Student student: studentArrayList) {
+                System.out.println(student.toString());
             }
         } else {
             System.out.println("暂无学生信息列表");
         }
-    }
-
-    @Override
-    protected void remove() {
-        super.remove(this.service);
-    }
-
-    @Override
-    protected void update() {
-        super.update(this.service);
     }
 }

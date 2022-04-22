@@ -6,11 +6,11 @@ import com.untilthecore.edu.info.manager.service.BaseService;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-abstract class BaseController<T> {
+abstract class BaseController<T, E> {
     Scanner scanner = new Scanner(System.in);
-    BaseService<T> service;
+    BaseService<T, E> service;
 
-    public BaseController(BaseService<T> service) {
+    public BaseController(BaseService<T, E> service) {
         this.service = service;
     }
 
@@ -44,7 +44,7 @@ abstract class BaseController<T> {
         }
     }
 
-    protected Person add() {
+    protected Person createPerson() {
         String userId;
         while (true) {
             System.out.print("请输入用户ID:");
@@ -85,6 +85,7 @@ abstract class BaseController<T> {
         String userId = checkUserId();
 
         if(userId.equals("")) {
+            System.out.println("查无此人");
             return;
         }
 
@@ -99,7 +100,7 @@ abstract class BaseController<T> {
         }
     }
 
-    protected T find() {
+    protected T findUser() {
         String userId = checkUserId();
         if(userId.equals("")) {
             return null;
@@ -107,13 +108,7 @@ abstract class BaseController<T> {
         return service.find(userId);
     }
 
-    public abstract void start();
-
-//    protected abstract void add();
-
-//    protected abstract void find();
-
-    protected ArrayList<Person> findAll(BaseService service) {
+    protected ArrayList<T> findAllUser() {
         return service.findAll();
     }
 
@@ -124,7 +119,6 @@ abstract class BaseController<T> {
         boolean exists = service.isExists(id);
 
         if (!exists) {
-            System.out.println("查无此人");
             id = "";
         }
         return id;
@@ -132,7 +126,9 @@ abstract class BaseController<T> {
 
     protected abstract void findAll();
 
-//    protected abstract void remove();
+    public abstract void start();
 
-//    protected abstract void update();
+    protected abstract void add();
+
+    protected abstract void find();
 }

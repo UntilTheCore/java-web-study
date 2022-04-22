@@ -6,7 +6,7 @@ import com.untilthecore.edu.info.manager.domain.Student;
 
 import java.util.ArrayList;
 
-public class StudentService extends BaseService<Student> {
+public class StudentService extends BaseService<Student, StudentDao> {
 
   public StudentService() {
     super(new StudentDao());
@@ -31,9 +31,9 @@ public class StudentService extends BaseService<Student> {
     }
 
     ArrayList<Student> all = this.findAll();
-    for (Person student : all) {
+    for (Student student : all) {
       if(student.getId().equals(id)) {
-        return (Student)student;
+        return student;
       }
     }
 
@@ -42,5 +42,17 @@ public class StudentService extends BaseService<Student> {
 
   public boolean remove(String id) {
     return dao.remove(id);
+  }
+
+  public boolean isExists(String id) {
+    ArrayList<Student> students = dao.findAll();
+    boolean exists = false;
+    for (Student student : students) {
+      if (student.getId().equals(id)) {
+        exists = true;
+        break;
+      }
+    }
+    return exists;
   }
 }
