@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 public class TeacherDao extends BaseDao<Teacher> {
     private static final ArrayList<Teacher> teachers = new ArrayList<>();
+
+    static {
+        teachers.add(new Teacher("t001", "核二三", 20, "男"));
+        teachers.add(new Teacher("t002", "王五", 20, "女"));
+    }
     @Override
     public boolean add(Teacher teacher) {
         return teachers.add(teacher);
